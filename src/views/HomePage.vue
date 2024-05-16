@@ -2,7 +2,7 @@
   <div>
     <navbar-component />
     <div class="book-list">
-      <div v-for="(book, index) in books" :key="index" class="book-card">
+      <div v-for="(book, index) in books" :key="index" class="book-card"  @click="goToBookDetail(book.id)">
         <card-component
           :title="book.volumeInfo.title"
           :description="truncateText(book.volumeInfo.description)"
@@ -52,6 +52,9 @@ export default {
       } else {
         return text.slice(0, this.maxTextLength) + "...";
       }
+    },
+    async goToBookDetail(bookId) {
+      this.$router.push({ name: "BookDetail", params: { id: bookId } });
     },
   },
 };
