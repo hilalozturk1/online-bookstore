@@ -2,7 +2,7 @@
   <header>
     <header-title>{{ title }}</header-title>
     <nav>
-      <router-link to="/">Home</router-link>
+      <router-link to="/" exact>Home</router-link>
       <router-link to="/cart">Shopping Cart</router-link>
     </nav>
   </header>
@@ -52,5 +52,10 @@ nav a {
     margin-left: 0;
     margin-top: 5px;
   }
+}
+.router-link-active {
+  padding: 0 5px;
+  border: 0.5px solid white;
+  border-radius: 15px;
 }
 </style>
