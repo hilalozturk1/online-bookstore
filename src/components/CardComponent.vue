@@ -1,6 +1,6 @@
 <template>
-  <div class="card">
-    <img :src="imageUrl" alt="Card Image">
+  <div :class="{ card: true, fullscreen: cardDetail }">
+    <img :src="imageUrl" alt="Card Image" />
     <div class="card-body">
       <h2>{{ title }}</h2>
       <p>{{ description }}</p>
@@ -16,6 +16,7 @@ export default {
     title: String,
     description: String,
     imageUrl: String,
+    cardDetail: Boolean,
   },
   methods: {
     addToCart() {
@@ -37,6 +38,17 @@ export default {
   }
 }
 
+.fullscreen {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  @media only screen and (max-width: 450px) {
+    width: 100%;
+  }
+}
+
 .card img {
   width: 100%;
   border-radius: 5px 5px 0 0;
@@ -46,4 +58,3 @@ export default {
   text-align: center;
 }
 </style>
-

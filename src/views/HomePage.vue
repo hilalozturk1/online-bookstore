@@ -2,11 +2,17 @@
   <div>
     <navbar-component />
     <div class="book-list">
-      <div v-for="(book, index) in books" :key="index" class="book-card"  @click="goToBookDetail(book.id)">
+      <div
+        v-for="(book, index) in books"
+        :key="index"
+        class="book-card"
+        @click="goToBookDetail(book.id)"
+      >
         <card-component
           :title="book.volumeInfo.title"
           :description="truncateText(book.volumeInfo.description)"
           :imageUrl="book.volumeInfo.imageLinks.thumbnail"
+          :cardDetail="false"
         />
       </div>
     </div>
