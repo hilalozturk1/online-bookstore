@@ -83,7 +83,7 @@ export default {
 }
 
 .book-card img {
-  width: 100%;
+  /*width: 100%;*/
   border-radius: 5px 5px 0 0;
 }
 
