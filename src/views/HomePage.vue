@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar-component />
+    <navbar-component title="Book Store"/>
     <div class="book-list">
       <div
         v-for="(book, index) in books"

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Online Bookstore</h1>
+    <header-title>{{ title }}</header-title>
     <nav>
       <router-link to="/">Home</router-link>
       <router-link to="/cart">Shopping Cart</router-link>
@@ -11,6 +11,9 @@
 export default {
   name: "NavbarComponent",
   components: {},
+  props: {
+    title: String,
+  },
 };
 </script>
 
@@ -21,15 +24,17 @@ header {
   border-radius: 10px;
 }
 
-h1 {
+header-title {
   color: white;
   margin: 0;
+  font-size: 24px;
 }
 
 nav {
   display: flex;
   border-radius: 10px;
   overflow: hidden;
+  margin-top: 8px;
 }
 
 nav a {

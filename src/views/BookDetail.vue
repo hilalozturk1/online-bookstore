@@ -2,7 +2,7 @@
   <div>
     <div v-if="loading">Loading...</div>
     <div v-else>
-      Book Detail
+      <navbar-component :title="book.volumeInfo.title" />
       <card-component
         v-if="book.volumeInfo"
         :title="book.volumeInfo.title"
@@ -11,16 +11,23 @@
         :cardDetail="true"
       />
     </div>
+    <footer-component />
   </div>
 </template>
 
 <script>
 import { getBookDetails } from "../services/api";
 import CardComponent from "../components/CardComponent.vue";
+import NavbarComponent from "../components/NavbarComponent.vue";
+import FooterComponent from "../components/FooterComponent.vue";
 
 export default {
   name: "BookDetail",
-  components: { CardComponent: CardComponent },
+  components: {
+    CardComponent: CardComponent,
+    NavbarComponent: NavbarComponent,
+    FooterComponent: FooterComponent,
+  },
   data() {
     return {
       book: {},
