@@ -9,6 +9,8 @@
         :description="truncateText(book.volumeInfo.description)"
         :imageUrl="book.volumeInfo.imageLinks.thumbnail"
         :cardDetail="true"
+        :id="book.id"
+        :price="book.saleInfo.listPrice"
       />
     </div>
     <footer-component />

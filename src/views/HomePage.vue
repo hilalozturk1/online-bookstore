@@ -1,22 +1,27 @@
 <template>
   <div>
-    <navbar-component title="Book Store"/>
-    <div class="book-list">
-      <div
-        v-for="(book, index) in books"
-        :key="index"
-        class="book-card"
-        @click="goToBookDetail(book.id)"
-      >
-        <card-component
-          :title="book.volumeInfo.title"
-          :description="truncateText(book.volumeInfo.description)"
-          :imageUrl="book.volumeInfo.imageLinks.thumbnail"
-          :cardDetail="false"
-        />
+    <div v-if="loading">Loading...</div>
+    <div v-else>
+      <navbar-component title="Book Store" />
+      <div class="book-list">
+        <div
+          v-for="(book, index) in books"
+          :key="index"
+          class="book-card"
+          @click="goToBookDetail(book.id)"
+        >
+          <card-component
+            :title="book.volumeInfo.title"
+            :description="truncateText(book.volumeInfo.description)"
+            :imageUrl="book.volumeInfo.imageLinks.thumbnail"
+            :cardDetail="false"
+            :id="book.id"
+            :price="book.saleInfo.listPrice"
+          />
+        </div>
       </div>
+      <footer-component />
     </div>
-    <footer-component />
   </div>
 </template>
 
@@ -38,6 +43,7 @@ export default {
     return {
       books: [],
       maxTextLength: 100,
+      loading: true,
     };
   },
   mounted() {
@@ -50,6 +56,8 @@ export default {
         this.books = books;
       } catch (error) {
         console.error("Error fetching books:", error);
+      } finally {
+        this.loading = false;
       }
     },
     truncateText(text) {

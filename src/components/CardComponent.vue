@@ -4,25 +4,35 @@
     <div class="card-body">
       <h2>{{ title }}</h2>
       <p>{{ description }}</p>
-      <button @click="addToCart">Add to Cart</button>
+      <button @click="addToCartFunc">Add to Cart</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
   name: "CardComponent",
   props: {
+    id: Number,
     title: String,
     description: String,
     imageUrl: String,
     cardDetail: Boolean,
+    price: Number
   },
   methods: {
-    addToCart() {
-      console.log("Add to Cart button clicked");
-    },
-  },
+    ...mapMutations(['addToCart']),
+    addToCartFunc() {
+      const book = {
+        id: this.id,
+        title: this.title,
+        price: this.price
+      };
+      this.addToCart(book);
+    }
+  }
 };
 </script>
 
