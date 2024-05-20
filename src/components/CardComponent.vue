@@ -3,7 +3,7 @@
     <img :src="imageUrl" alt="Card Image" />
     <div class="card-body">
       <h2>{{ title }}</h2>
-      <p>{{ description }}</p>
+      <p>{{ truncatedDescription }}</p>
       <p>{{ price }}</p>
       <button @click="addToCartFunc" v-if="!shoppingCart">Add to Cart</button>
     </div>
@@ -20,9 +20,23 @@ export default {
     title: String,
     description: String,
     imageUrl: String,
-    cardDetail: Boolean,
-    shoppingCart: Boolean,
+    cardDetail: { type: Boolean, default: false },
+    shoppingCart: { type: Boolean, default: false },
     price: Object,
+  },
+  data() {
+    return {
+      maxLengthBookDetail: 400,
+      maxLength: 100,
+    };
+  },
+  computed: {
+    truncatedDescription() {
+      const maxLength = this.cardDetail ? this.maxLengthBookDetail : this.maxLength;
+      return this.description.length <= maxLength
+        ? this.description
+        : this.description.slice(0, maxLength) + "...";
+    },
   },
   methods: {
     ...mapMutations(["addToCart"]),

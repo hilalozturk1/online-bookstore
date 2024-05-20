@@ -12,9 +12,10 @@
         >
           <card-component
             :title="book.volumeInfo.title"
-            :description="truncateText(book.volumeInfo.description)"
+            :description="book.volumeInfo.description"
             :imageUrl="book.volumeInfo.imageLinks.thumbnail"
             :cardDetail="false"
+            :shoppingCart="false"
             :id="book.id"
             :price="book.saleInfo.listPrice"
           />
@@ -58,13 +59,6 @@ export default {
         console.error("Error fetching books:", error);
       } finally {
         this.loading = false;
-      }
-    },
-    truncateText(text) {
-      if (text.length <= this.maxTextLength) {
-        return text + " ***";
-      } else {
-        return text.slice(0, this.maxTextLength) + "...";
       }
     },
     async goToBookDetail(bookId) {

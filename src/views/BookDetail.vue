@@ -6,9 +6,10 @@
       <card-component
         v-if="book.volumeInfo"
         :title="book.volumeInfo.title"
-        :description="truncateText(book.volumeInfo.description)"
+        :description="book.volumeInfo.description"
         :imageUrl="book.volumeInfo.imageLinks.thumbnail"
         :cardDetail="true"
+        :shoppingCart="false"
         :id="book.id"
         :price="book.saleInfo.listPrice"
       />
@@ -50,13 +51,6 @@ export default {
         console.error("Error fetching book details:", error);
       } finally {
         this.loading = false;
-      }
-    },
-    truncateText(text) {
-      if (text.length <= this.maxTextLength) {
-        return text + " ***";
-      } else {
-        return text.slice(0, this.maxTextLength) + "...";
       }
     },
   },
