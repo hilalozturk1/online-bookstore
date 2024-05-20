@@ -1,6 +1,6 @@
 <template>
   <header>
-    <header-title>{{ title }}</header-title>
+    <p class="header-title">{{ title }}</p>
     <nav>
       <router-link to="/" exact>Home</router-link>
       <router-link to="/cart">Shopping Cart</router-link>
@@ -24,7 +24,7 @@ header {
   border-radius: 10px;
 }
 
-header-title {
+.header-title {
   color: white;
   margin: 0;
   font-size: 24px;
