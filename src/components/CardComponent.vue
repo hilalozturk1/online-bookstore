@@ -4,13 +4,14 @@
     <div class="card-body">
       <h2>{{ title }}</h2>
       <p>{{ description }}</p>
-      <button @click="addToCartFunc">Add to Cart</button>
+      <p>{{ price }}</p>
+      <button @click="addToCartFunc" v-if="!shoppingCart">Add to Cart</button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations } from "vuex";
 
 export default {
   name: "CardComponent",
@@ -20,19 +21,22 @@ export default {
     description: String,
     imageUrl: String,
     cardDetail: Boolean,
-    price: Number
+    shoppingCart: Boolean,
+    price: Object,
   },
   methods: {
-    ...mapMutations(['addToCart']),
+    ...mapMutations(["addToCart"]),
     addToCartFunc() {
       const book = {
         id: this.id,
         title: this.title,
-        price: this.price
+        price: this.price,
+        description: this.description,
+        imageUrl: this.imageUrl,
       };
       this.addToCart(book);
-    }
-  }
+    },
+  },
 };
 </script>
 
