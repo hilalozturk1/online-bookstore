@@ -5,7 +5,7 @@
       <h2>{{ title }}</h2>
       <p>{{ truncatedDescription }}</p>
       <p>{{ formattedPrice }} {{ currencyCode }}</p>
-      <button @click="addToCartFunc" v-if="!shoppingCart">Add to Cart</button>
+      <button @click="addToCartFunc" v-if="!shoppingCart && cardDetail">Add to Cart</button>
     </div>
   </div>
 </template>
