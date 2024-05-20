@@ -14,7 +14,7 @@
               :cardDetail="false"
               :shoppingCart="true"
               :id="item.id"
-              :price="item.price.amount"
+              :price="item.price"
               :description="item.description"
             />
             <button @click="removeFromCart(item.id)">Remove</button>

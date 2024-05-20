@@ -4,7 +4,7 @@
     <div class="card-body">
       <h2>{{ title }}</h2>
       <p>{{ truncatedDescription }}</p>
-      <p>{{ price }}</p>
+      <p>{{ formattedPrice }} {{ currencyCode }}</p>
       <button @click="addToCartFunc" v-if="!shoppingCart">Add to Cart</button>
     </div>
   </div>
@@ -16,13 +16,13 @@ import { mapMutations } from "vuex";
 export default {
   name: "CardComponent",
   props: {
-    id: Number,
+    id: String,
     title: String,
     description: String,
     imageUrl: String,
     cardDetail: { type: Boolean, default: false },
     shoppingCart: { type: Boolean, default: false },
-    price: Object,
+    price: { type: Object, default: () => {} },
   },
   data() {
     return {
@@ -36,6 +36,12 @@ export default {
       return this.description.length <= maxLength
         ? this.description
         : this.description.slice(0, maxLength) + "...";
+    },
+    formattedPrice() {
+      return this.price && this.price.amount ? `${this.price.amount}` : "0";
+    },
+    currencyCode() {
+      return this.price && this.price.currencyCode ? this.price.currencyCode : "";
     },
   },
   methods: {
