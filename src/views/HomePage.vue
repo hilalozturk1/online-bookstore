@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar-component title="Book Store" />
+    <navbar-component title="Book Store" @search-books="fetchBooks" />
     <div v-if="loading">Loading...</div>
     <div class="container-fluid" v-else>
       <div class="row">
@@ -13,12 +13,12 @@
           <card-component
             :title="book.volumeInfo.title"
             :description="book.volumeInfo.description"
-            :imageUrl="book.volumeInfo.imageLinks.thumbnail"
+            :imageUrl="book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''"
             :cardDetail="false"
             :shoppingCart="false"
             :id="book.id"
             :price="book.saleInfo.listPrice"
-            style="cursor:pointer"
+            style="cursor: pointer"
           />
         </div>
       </div>
@@ -51,9 +51,11 @@ export default {
     this.fetchBooks();
   },
   methods: {
-    async fetchBooks() {
+    async fetchBooks(query = "javascript") {
+      this.loading = true;
+      this.books = [];
       try {
-        const books = await getBooks("javascript");
+        const books = await getBooks(query);
         this.books = books;
       } catch (error) {
         console.error("Error fetching books:", error);

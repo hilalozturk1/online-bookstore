@@ -24,12 +24,14 @@
           </li>
         </ul>
       </div>
-      <form class="my-0">
+      <form class="my-0" @submit.prevent="searchBooks">
         <div class="form-row d-flex justify-content-center">
           <input
             class="form-control mr-sm-2"
             type="search"
-            placeholder="Search"
+            v-model="query"
+            @keyup.enter="searchBooks"
+            placeholder="Search for books by title or author"
             aria-label="Search"
           />
           <button class="btn btn-outline-primary ms-2" type="submit">Search</button>
@@ -44,6 +46,17 @@ export default {
   components: {},
   props: {
     title: String,
+  },
+  data() {
+    return {
+      query: "",
+    };
+  },
+  methods: {
+    searchBooks() {
+      const searchQuery = this.query ? this.query : "javascript";
+      this.$emit("search-books", searchQuery);
+    },
   },
 };
 </script>
