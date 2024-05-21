@@ -7,17 +7,17 @@
         <div v-if="cart.length === 0">Your cart is empty.</div>
         <ul v-else>
           <li v-for="(item, index) in cartDetails" :key="index" class="">
-            {{ item.title }} - {{ formatPrice(item.price.amount, item.price.currencyCode) }} x
-            {{ item.quantity }}
-            <card-component
-              :title="item.title"
-              :imageUrl="item.imageUrl"
-              :cardDetail="false"
-              :shoppingCart="true"
-              :id="item.id"
-              :price="item.price"
-              :description="item.description"
-            />
+            <div class="h5 mt-4">
+              {{ item.title }} -
+              {{
+                formatPrice(
+                  item.price && item.price?.amount ? item.price.amount : 0,
+                  item.price && item.price?.currencyCode ? item.price.currencyCode : "TRY"
+                )
+              }}
+              x
+              {{ item.quantity }}
+            </div>
             <div class="d-flex justify-content-center mt-4">
               <button @click="removeFromCart(item.id)" type="button" class="btn btn-danger">
                 Remove
@@ -37,6 +37,15 @@
                 -
               </button>
             </div>
+            <card-component
+              :title="item.title"
+              :imageUrl="item.imageUrl"
+              :cardDetail="false"
+              :shoppingCart="true"
+              :id="item.id"
+              :price="item.price"
+              :description="item.description"
+            />
           </li>
         </ul>
         <div v-if="cart.length > 0">
@@ -138,13 +147,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  margin: 10px 0;
-}
-</style>
