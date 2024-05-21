@@ -4,7 +4,7 @@
     <div v-else>
       <navbar-component :title="book.volumeInfo.title" />
       <div class="container">
-        <div class="row col-4 m-auto">
+        <div class="row col-md-6 m-auto col-12">
           <card-component
             v-if="book.volumeInfo"
             :title="book.volumeInfo.title"

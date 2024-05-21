@@ -90,14 +90,13 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["removeFromCart", "clearCart", "incrementQuantity", "decrementQuantity"]),
     formatPrice,
+    ...mapMutations(["removeFromCart", "clearCart", "incrementQuantity", "decrementQuantity"]),
     async fetchCartDetails() {
       this.loading = true;
       try {
         const details = await Promise.all(
           this.cart.map(async (item) => {
-            console.log("card", this.cart);
             const bookDetails = await getBookDetails(item.id);
             return { ...item, ...bookDetails };
           })

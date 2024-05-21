@@ -2,7 +2,7 @@
   <div>
     <navbar-component title="Book Store" @search-books="fetchBooks" />
     <div v-if="loading">Loading...</div>
-    <div class="container-fluid" v-else>
+    <div v-else>
       <div class="row">
         <div
           v-for="(book, index) in books"

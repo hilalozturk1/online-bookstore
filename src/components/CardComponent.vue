@@ -83,9 +83,7 @@ export default {
       this.addToCart(book);
 
       this.$toast.open({
-        message: `${this.title} has been added to your cart! (Total Quantity: ${
-          this.currentQuantity
-        })`,
+        message: `${this.title} has been added to your cart! (Total Quantity: ${this.currentQuantity})`,
         type: "success",
       });
     },
