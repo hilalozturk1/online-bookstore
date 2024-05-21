@@ -48,7 +48,7 @@ export default {
   computed: {
     truncatedDescription() {
       const maxLength = this.cardDetail ? this.maxLengthBookDetail : this.maxLength;
-      return this.description.length <= maxLength
+      return this.description ? this.description.length : 0 <= maxLength
         ? this.description
         : this.description.slice(0, maxLength) + "...";
     },
