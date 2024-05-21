@@ -1,12 +1,12 @@
-import { createStore } from 'vuex';
+import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    cart: []
+    cart: [],
   },
   mutations: {
     addToCart(state, book) {
-      const existingItem = state.cart.find(item => item.id === book.id);
+      const existingItem = state.cart.find((item) => item.id === book.id);
 
       if (existingItem) {
         existingItem.quantity++;
@@ -15,12 +15,18 @@ export default createStore({
       }
     },
     removeFromCart(state, bookId) {
-      state.cart = state.cart.filter(item => item.id !== bookId);
+      state.cart = state.cart.filter((item) => item.id !== bookId);
     },
     clearCart(state) {
       state.cart = [];
-    }
+    },
+  },
+  getters: {
+    getCartItemQuantity: (state) => (id) => {
+      const item = state.cart.find((item) => item.id === id);
+      return item ? item.quantity : 0;
+    },
   },
   actions: {},
-  modules: {}
+  modules: {},
 });

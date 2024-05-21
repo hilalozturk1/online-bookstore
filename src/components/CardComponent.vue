@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 import { formatPrice } from "@/utils/common";
 
 export default {
@@ -56,6 +56,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["getCartItemQuantity"]),
     truncatedDescription() {
       const maxLength = this.cardDetail ? this.maxLengthBookDetail : this.maxLength;
 
@@ -63,6 +64,9 @@ export default {
         maxLength
         ? this.description
         : this.description.slice(0, maxLength) + "...";
+    },
+    currentQuantity() {
+      return this.getCartItemQuantity(this.id);
     },
   },
   methods: {
@@ -77,6 +81,13 @@ export default {
         imageUrl: this.imageUrl,
       };
       this.addToCart(book);
+
+      this.$toast.open({
+        message: `${this.title} has been added to your cart! (Total Quantity: ${
+          this.currentQuantity
+        })`,
+        type: "success",
+      });
     },
   },
 };
