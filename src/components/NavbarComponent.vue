@@ -31,6 +31,7 @@
             type="search"
             v-model="query"
             @keyup.enter="searchBooks"
+            @input="searchBooks"
             placeholder="Search for books by title or author"
             aria-label="Search"
           />
