@@ -3,16 +3,20 @@
     <div v-if="loading">Loading...</div>
     <div v-else>
       <navbar-component :title="book.volumeInfo.title" />
-      <card-component
-        v-if="book.volumeInfo"
-        :title="book.volumeInfo.title"
-        :description="book.volumeInfo.description"
-        :imageUrl="book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''"
-        :cardDetail="true"
-        :shoppingCart="false"
-        :id="book.id"
-        :price="book.saleInfo.listPrice"
-      />
+      <div class="container">
+        <div class="row col-4 m-auto">
+          <card-component
+            v-if="book.volumeInfo"
+            :title="book.volumeInfo.title"
+            :description="book.volumeInfo.description"
+            :imageUrl="book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''"
+            :cardDetail="true"
+            :shoppingCart="false"
+            :id="book.id"
+            :price="book.saleInfo.listPrice"
+          />
+        </div>
+      </div>
     </div>
     <footer-component />
   </div>

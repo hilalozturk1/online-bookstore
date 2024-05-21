@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card p-3 mt-3"
+    class="card p-3 mt-3 d-flex align-items-center"
     data-toggle="tooltip"
     data-placement="top"
     :title="!cardDetail && !shoppingCart ? title : ''"
