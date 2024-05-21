@@ -1,5 +1,5 @@
 <template>
-  <div class="card p-3 mt-3">
+  <div class="card p-3 mt-3" data-toggle="tooltip" data-placement="top" :title="title">
     <img
       :src="imageUrl"
       alt="Card Image"
