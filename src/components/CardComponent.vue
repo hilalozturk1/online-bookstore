@@ -5,7 +5,14 @@
     <div class="card-body">
       <p>{{ truncatedDescription }}</p>
       <p>{{ formattedPrice }} {{ currencyCode }}</p>
-      <button @click="addToCartFunc" v-if="!shoppingCart && cardDetail">Add to Cart</button>
+      <button
+        @click="addToCartFunc"
+        v-if="!shoppingCart && cardDetail"
+        type="button"
+        class="btn btn-primary"
+      >
+        Add to Cart
+      </button>
     </div>
   </div>
 </template>
@@ -59,34 +66,9 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-.card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-  }
-}
-
-.fullscreen {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  width: 300px;
-  @media only screen and (max-width: 450px) {
-    width: 100%;
-  }
-}
-
-.card img {
-  /*width: 100%;*/
-  border-radius: 5px 5px 0 0;
-}
-
-.card-body {
-  text-align: center;
+img {
+  max-width: 200px;
+  height: auto;
 }
 </style>

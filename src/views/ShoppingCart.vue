@@ -10,19 +10,19 @@
             {{ item.title }} - ${{ item.price }} x {{ item.quantity }}
             <card-component
               :title="item.title"
-              :imageUrl="itemthumbnail"
+              :imageUrl="item.imageUrl"
               :cardDetail="false"
               :shoppingCart="true"
               :id="item.id"
               :price="item.price"
               :description="item.description"
             />
-            <button @click="removeFromCart(item.id)">Remove</button>
+            <button @click="removeFromCart(item.id)" type="button" class="btn btn-danger">Remove</button>
           </li>
         </ul>
         <div v-if="cart.length > 0">
-          <p>Total Price: ${{ totalPrice }}</p>
-          <button @click="checkout">Checkout</button>
+          <p>Total Price: {{ totalPrice }}</p>
+          <button @click="checkout" type="button" class="btn btn-link">Checkout</button>
         </div>
       </div>
     </div>
@@ -102,15 +102,5 @@ ul {
 }
 li {
   margin: 10px 0;
-}
-button {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #ff0000;
 }
 </style>
