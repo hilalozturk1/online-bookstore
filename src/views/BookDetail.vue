@@ -7,7 +7,7 @@
         v-if="book.volumeInfo"
         :title="book.volumeInfo.title"
         :description="book.volumeInfo.description"
-        :imageUrl="book.volumeInfo.imageLinks.thumbnail"
+        :imageUrl="book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : ''"
         :cardDetail="true"
         :shoppingCart="false"
         :id="book.id"

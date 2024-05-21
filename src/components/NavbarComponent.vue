@@ -24,7 +24,7 @@
           </li>
         </ul>
       </div>
-      <form class="my-0" @submit.prevent="searchBooks">
+      <form class="my-4 my-lg-0" @submit.prevent="searchBooks">
         <div class="form-row d-flex justify-content-center">
           <input
             class="form-control mr-sm-2"

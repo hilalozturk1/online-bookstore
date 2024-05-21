@@ -7,7 +7,7 @@
         <div v-if="cart.length === 0">Your cart is empty.</div>
         <ul v-else>
           <li v-for="(item, index) in cartDetails" :key="index">
-            {{ item.title }} - ${{ item.price }} x {{ item.quantity }}
+            {{ item.title }} - {{ item.price }} x {{ item.quantity }}
             <card-component
               :title="item.title"
               :imageUrl="item.imageUrl"
@@ -17,7 +17,9 @@
               :price="item.price"
               :description="item.description"
             />
-            <button @click="removeFromCart(item.id)" type="button" class="btn btn-danger">Remove</button>
+            <button @click="removeFromCart(item.id)" type="button" class="btn btn-danger">
+              Remove
+            </button>
           </li>
         </ul>
         <div v-if="cart.length > 0">
@@ -37,7 +39,7 @@ import CardComponent from "../components/CardComponent.vue";
 
 import { getBookDetails } from "../services/api";
 import { mapState, mapMutations } from "vuex";
-import { formatPrice } from '@/utils/common';
+import { formatPrice } from "@/utils/common";
 
 export default {
   name: "ShoppingCart",
@@ -56,7 +58,8 @@ export default {
     ...mapState(["cart"]),
     totalPrice() {
       return this.cartDetails.reduce((total, item) => {
-        return total + item.price.amount * item.quantity;
+        const price = item.price && item.price.amount ? item.price.amount : 0;
+        return total + price * item.quantity;
       }, 0);
     },
   },
@@ -91,6 +94,7 @@ export default {
       handler() {
         this.fetchCartDetails();
       },
+      deep: true,
       immediate: true,
     },
   },

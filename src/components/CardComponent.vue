@@ -1,6 +1,11 @@
 <template>
   <div class="card p-3 mt-3">
-    <img :src="imageUrl" alt="Card Image" class="img-thumbnail rounded" />
+    <img
+      :src="imageUrl"
+      alt="Card Image"
+      class="img-thumbnail rounded"
+      :class="cardDetail || shoppingCart ? 'card-detail-img' : ''"
+    />
     <div class="card-header">{{ title }}</div>
     <div class="card-body">
       <p>{{ truncatedDescription }}</p>
@@ -48,7 +53,9 @@ export default {
   computed: {
     truncatedDescription() {
       const maxLength = this.cardDetail ? this.maxLengthBookDetail : this.maxLength;
-      return this.description ? this.description.length : 0 <= maxLength
+
+      return (this.description && this.description.length ? this.description.length : 0) <=
+        maxLength
         ? this.description
         : this.description.slice(0, maxLength) + "...";
     },
@@ -70,7 +77,7 @@ export default {
 };
 </script>
 <style scoped>
-img {
+.card-detail-img {
   max-width: 200px;
   height: auto;
 }
