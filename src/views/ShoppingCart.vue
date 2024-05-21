@@ -21,7 +21,7 @@
           </li>
         </ul>
         <div v-if="cart.length > 0">
-          <p>Total Price: {{ totalPrice }}</p>
+          <p>Total Price: {{ formatPrice(totalPrice, "TRY") }}</p>
           <button @click="checkout" type="button" class="btn btn-link">Checkout</button>
         </div>
       </div>
@@ -37,6 +37,7 @@ import CardComponent from "../components/CardComponent.vue";
 
 import { getBookDetails } from "../services/api";
 import { mapState, mapMutations } from "vuex";
+import { formatPrice } from '@/utils/common';
 
 export default {
   name: "ShoppingCart",
@@ -61,6 +62,7 @@ export default {
   },
   methods: {
     ...mapMutations(["removeFromCart", "clearCart"]),
+    formatPrice,
     async fetchCartDetails() {
       this.loading = true;
       try {

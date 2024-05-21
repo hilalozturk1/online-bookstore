@@ -18,6 +18,7 @@
             :shoppingCart="false"
             :id="book.id"
             :price="book.saleInfo.listPrice"
+            style="cursor:pointer"
           />
         </div>
       </div>

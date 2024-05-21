@@ -4,7 +4,14 @@
     <div class="card-header">{{ title }}</div>
     <div class="card-body">
       <p>{{ truncatedDescription }}</p>
-      <p>{{ formattedPrice }} {{ currencyCode }}</p>
+      <p>
+        {{
+          formatPrice(
+            price && price.amount ? price.amount : 0,
+            price && price.currencyCode ? price.currencyCode : "TRY"
+          )
+        }}
+      </p>
       <button
         @click="addToCartFunc"
         v-if="!shoppingCart && cardDetail"
@@ -19,6 +26,7 @@
 
 <script>
 import { mapMutations } from "vuex";
+import { formatPrice } from "@/utils/common";
 
 export default {
   name: "CardComponent",
@@ -44,15 +52,10 @@ export default {
         ? this.description
         : this.description.slice(0, maxLength) + "...";
     },
-    formattedPrice() {
-      return this.price && this.price.amount ? `${this.price.amount}` : "0";
-    },
-    currencyCode() {
-      return this.price && this.price.currencyCode ? this.price.currencyCode : "";
-    },
   },
   methods: {
     ...mapMutations(["addToCart"]),
+    formatPrice,
     addToCartFunc() {
       const book = {
         id: this.id,
