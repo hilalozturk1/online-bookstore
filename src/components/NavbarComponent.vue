@@ -42,6 +42,8 @@
   </div>
 </template>
 <script>
+import _ from "lodash";
+
 export default {
   name: "NavbarComponent",
   components: {},
@@ -54,10 +56,10 @@ export default {
     };
   },
   methods: {
-    searchBooks() {
+    searchBooks: _.debounce(function () {
       const searchQuery = this.query ? this.query : "javascript";
       this.$emit("search-books", searchQuery);
-    },
+    }, 1500),
   },
 };
 </script>
