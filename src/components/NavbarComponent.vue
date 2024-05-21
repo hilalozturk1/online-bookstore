@@ -1,11 +1,42 @@
 <template>
-  <header>
-    <p class="header-title">{{ title }}</p>
-    <nav>
-      <router-link to="/" exact>Home</router-link>
-      <router-link to="/cart">Shopping Cart</router-link>
+  <div class="">
+    <nav class="navbar navbar-light bg-light p-4">
+      <div>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <router-link
+              to="/"
+              exact
+              class="nav-link"
+              active-class="active"
+              exact-active-class="active"
+              >Home</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link
+              to="/cart"
+              class="nav-link"
+              active-class="active"
+              exact-active-class="active"
+              >Shopping Cart</router-link
+            >
+          </li>
+        </ul>
+      </div>
+      <form class="my-0">
+        <div class="form-row d-flex justify-content-center">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-primary ms-2" type="submit">Search</button>
+        </div>
+      </form>
     </nav>
-  </header>
+  </div>
 </template>
 <script>
 export default {
@@ -16,46 +47,8 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-header {
-  background-color: #333;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.header-title {
-  color: white;
-  margin: 0;
-  font-size: 24px;
-}
-
-nav {
-  display: flex;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 8px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 10px;
-}
-
-@media only screen and (max-width: 600px) {
-  nav {
-    flex-direction: column;
-  }
-
-  nav a {
-    margin-left: 0;
-    margin-top: 5px;
-  }
-}
-.router-link-active {
-  padding: 0 5px;
-  border: 0.5px solid white;
-  border-radius: 15px;
+.nav-link.active {
+  color: #007bff;
 }
 </style>

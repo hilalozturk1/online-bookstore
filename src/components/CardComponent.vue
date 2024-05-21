@@ -1,8 +1,8 @@
 <template>
-  <div :class="{ card: true, fullscreen: cardDetail }">
-    <img :src="imageUrl" alt="Card Image" />
+  <div class="card p-3 mt-3">
+    <img :src="imageUrl" alt="Card Image" class="img-thumbnail rounded" />
+    <div class="card-header">{{ title }}</div>
     <div class="card-body">
-      <h2>{{ title }}</h2>
       <p>{{ truncatedDescription }}</p>
       <p>{{ formattedPrice }} {{ currencyCode }}</p>
       <button @click="addToCartFunc" v-if="!shoppingCart && cardDetail">Add to Cart</button>
@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      maxLengthBookDetail: 400,
+      maxLengthBookDetail: 300,
       maxLength: 100,
     };
   },
@@ -64,9 +64,7 @@ export default {
 .card {
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  width: 200px;
+
   @media only screen and (max-width: 600px) {
     width: 100%;
   }
