@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="mt-4">
     <p>© 2024 Online Bookstore</p>
   </footer>
 </template>
