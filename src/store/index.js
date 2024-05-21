@@ -17,6 +17,20 @@ export default createStore({
     removeFromCart(state, bookId) {
       state.cart = state.cart.filter((item) => item.id !== bookId);
     },
+    incrementQuantity(state, bookId) {
+      const item = state.cart.find(i => i.id === bookId);
+      if (item) {
+        item.quantity++;
+      }
+    },
+    decrementQuantity(state, bookId) {
+      const item = state.cart.find(i => i.id === bookId);
+      if (item && item.quantity > 1) {
+        item.quantity--;
+      } else if (item && item.quantity === 1) {
+        state.cart = state.cart.filter(i => i.id !== bookId);
+      }
+    },
     clearCart(state) {
       state.cart = [];
     },

@@ -6,8 +6,9 @@
       <div v-else>
         <div v-if="cart.length === 0">Your cart is empty.</div>
         <ul v-else>
-          <li v-for="(item, index) in cartDetails" :key="index">
-            {{ item.title }} - {{ item.price }} x {{ item.quantity }}
+          <li v-for="(item, index) in cartDetails" :key="index" class="">
+            {{ item.title }} - {{ formatPrice(item.price.amount, item.price.currencyCode) }} x
+            {{ item.quantity }}
             <card-component
               :title="item.title"
               :imageUrl="item.imageUrl"
@@ -17,9 +18,25 @@
               :price="item.price"
               :description="item.description"
             />
-            <button @click="removeFromCart(item.id)" type="button" class="btn btn-danger">
-              Remove
-            </button>
+            <div class="d-flex justify-content-center mt-4">
+              <button @click="removeFromCart(item.id)" type="button" class="btn btn-danger">
+                Remove
+              </button>
+              <button
+                @click="_incrementQuantity(item)"
+                type="button"
+                class="btn btn-secondary ms-2"
+              >
+                +
+              </button>
+              <button
+                @click="_decrementQuantity(item)"
+                type="button"
+                class="btn btn-secondary ms-2"
+              >
+                -
+              </button>
+            </div>
           </li>
         </ul>
         <div v-if="cart.length > 0">
@@ -58,13 +75,13 @@ export default {
     ...mapState(["cart"]),
     totalPrice() {
       return this.cartDetails.reduce((total, item) => {
-        const price = item.price && item.price.amount ? item.price.amount : 0;
+        const price = item.price && item.price?.amount ? item.price.amount : 0;
         return total + price * item.quantity;
       }, 0);
     },
   },
   methods: {
-    ...mapMutations(["removeFromCart", "clearCart"]),
+    ...mapMutations(["removeFromCart", "clearCart", "incrementQuantity", "decrementQuantity"]),
     formatPrice,
     async fetchCartDetails() {
       this.loading = true;
@@ -83,8 +100,29 @@ export default {
         this.loading = false;
       }
     },
+    _incrementQuantity(item) {
+      this.incrementQuantity(item.id);
+      this.$toast.open({
+        message: `Increased quantity of ${item.title} to ${item.quantity + 1}`,
+        type: "success",
+      });
+    },
+    _decrementQuantity(item) {
+      this.decrementQuantity(item.id);
+      if (item.quantity > 1) {
+        this.$toast.open({
+          message: `Decreased quantity of ${item.title} to ${item.quantity - 1}`,
+          type: "info",
+        });
+      } else {
+        this.$toast.open({
+          message: `Removed ${item.title} from your cart`,
+          type: "info",
+        });
+      }
+    },
     checkout() {
-      alert(`Total Price: $${this.totalPrice}.!`);
+      alert(`Total Price: ${formatPrice(this.totalPrice, "TRY")}.!`);
       this.clearCart();
       this.cartDetails = [];
     },
